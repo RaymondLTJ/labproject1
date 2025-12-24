@@ -18,6 +18,7 @@ void identify_player (char player[100]);
 void jeda_dan_hapus();
 int input_valid(int min, int max);
 void delay();
+void delay_custom(int x);
 int cek_benar(int hasil);
 int random_num();
 void bubble_sort(int arr[], int n);
@@ -80,7 +81,15 @@ void delay(){
 	#ifdef _WIN32
     	Sleep(1500);
 	#else
-    	usleep(1500 * 1000);
+    	usleep(1500 * 1000); // mac
+	#endif
+}	
+
+void delay_custom(int x){
+	#ifdef _WIN32
+    	Sleep(x);
+	#else
+    	usleep(x * 1000); // mac
 	#endif
 }	
 
@@ -113,7 +122,7 @@ int input_valid(int min, int max){
 }
 
 int random_num(){
-	return rand()%10;
+	return rand()%9 + 1;
 }
 
 int random_char(){
@@ -163,7 +172,7 @@ int linear_search(int arr[], int n, int target){
 void show_leaderboard(){
     FILE *fp = fopen("leaderboard.txt", "r");
     if (fp == NULL) {
-        printf("Leaderboard masih kosong\n");
+        printf("Leaderboard masih kosong.\n");
         return;
     }
     
@@ -171,7 +180,7 @@ void show_leaderboard(){
     int attempt[100];
     int count = 0;
     
-    printf ("Leaderboard (Dari attempt terkecil)\n");
+    printf ("Leaderboard (Dari attempt terendah)\n");
     printf ("====================================\n");
     
 	while (fscanf(fp, "%s %d", nama[count], &attempt[count]) != EOF) {
@@ -189,7 +198,7 @@ void show_leaderboard(){
 void save_leaderboard(char nama[], int attempt){
     FILE *fp = fopen("leaderboard.txt", "a");
     if (fp == NULL) {
-        printf("Gagal buka leaderbord\n");
+        printf("Gagal buka leaderbord.\n");
         return;
     }
 
@@ -198,45 +207,45 @@ void save_leaderboard(char nama[], int attempt){
 }
 
 void narasip1(){
-	printf ("Kamu terbangun dengan denyut sakit yang menghantam kepalamu seperti palu \n\n");
+	printf ("Kamu terbangun dengan denyut sakit yang menghantam kepalamu seperti palu.\n\n");
 	delay();
 	printf ("Kamu melihat-lihat tempat sekitarmu dan bertanya-tanya..\n\n");
 	delay();	
-	printf ("\"Gedung apa ini? Apa yang baru saja terjadi?\", gumam dirimu dalam hati\n\n");
+	printf ("\"Gedung apa ini? Apa yang baru saja terjadi?\", gumam dirimu dalam hati.\n\n");
 	delay();
-	printf ("Kamu pun berkeliling-keliling gedung aneh tersebut dengan penuh rasa kebingungan\n\n");
+	printf ("Kamu pun berkeliling-keliling gedung aneh tersebut dengan penuh rasa kebingungan.\n\n");
 	delay();
-	printf ("Akhirnya, kamu memutuskan untuk masuk ke satu pintu yang tersedia di gedung tersebut\n\n");
+	printf ("Akhirnya, kamu memutuskan untuk masuk ke satu pintu yang tersedia di gedung tersebut.\n\n");
 }
 
 void narasip2(){
-	printf ("Kamu merasa lega telah melewati rintangan di pintu tersebut\n\n");
+	printf ("Kamu merasa lega telah melewati rintangan di pintu tersebut.\n\n");
 	delay();
-	printf ("Merasa tidak ada lagi rintangan, kamu berjalan-jalan dengan hati yang bahagia\n\n");
+	printf ("Merasa tidak ada lagi rintangan, kamu berjalan-jalan dengan hati yang bahagia.\n\n");
 	delay();
-	printf ("Namun... di depanmu terlihat satu pintu baru yang terasa.... intimidatif\n\n");
+	printf ("Namun... di depanmu terlihat satu pintu baru yang terasa.... intimidatif..\n\n");
 	delay();
-	printf ("Berharap bisa keluar, kamu mencoba masuk ke pintu tersebut\n");
+	printf ("Berharap bisa keluar, kamu mencoba masuk ke pintu tersebut.\n");
 }
 
 void narasip3(){
 	printf ("Kamu akhirnya mencapai akhir perjalanan...\n");
 	delay();
-	printf ("Atau itu yang kamu kira\n");
+	printf ("Atau itu yang kamu kira.\n");
 	delay();
-	printf ("Di depanmu, terdapat sebuah pintu lagi\n");
+	printf ("Di depanmu, terdapat sebuah pintu lagi.\n");
 	delay();
-	printf ("Kamu memasuki pintu tersebut secara perlahan\n\n");
+	printf ("Kamu membuka pintu tersebut secara perlahan.\n\n");
 	delay();
-	printf ("Tiba-tiba, muncul sebuah sosok yang menyeramkan\n\n");
+	printf ("Tiba-tiba, muncul sebuah sosok yang menyeramkan.\n\n");
 	delay();
-	printf ("Di hadapanmu Ia berkata:\n");
+	printf ("Di hadapanmu, Ia berkata:\n");
 	delay();
-	printf ("\"Selamat datang di duniaku, wahai anak muda\"\n");
+	printf ("\"Selamat datang di duniaku, wahai anak muda.\"\n");
 	delay();
-	printf ("\"Jika kamu ingin keluar dari duniaku, sebut ulang 3 hal yang akan aku ucapkan\"\n");
+	printf ("\"Jika kamu ingin keluar dari duniaku, sebut ulang 3 hal yang akan aku ucapkan.\"\n");
 	delay();
-	printf ("\"Jika semua benar, kamu boleh pergi dari sini\"\n\n");
+	printf ("\"Jika semua benar, kamu boleh pergi dari sini.\"\n\n");
 }
 
 void narasi1_1(int pertama1, int *attempt){
@@ -263,7 +272,7 @@ void narasi1_1(int pertama1, int *attempt){
 		printf ("                                                                          Attempt: %d\n", *attempt);
 		printf("Tulisan samar muncul di dinding:\n");
 		printf("\"Lempar dadu dan tentukan nasibmu...\"\n\n");
-		printf ("Kamu tahu apa yang harus dilakukan\n");
+		printf ("Kamu tahu apa yang harus dilakukan.\n");
 	}
     printf("1. Lempar dadu\n");
     printf("2. Mundur\n");
@@ -350,9 +359,9 @@ void narasi2_1(int pertama1, int *attempt){
     	delay();
 		printf("Sebuah suara bergema di kepalamu:\n\n");
     	delay();
-		printf("“Jawaban adalah kunci. Urutan adalah jalan.”\n");
+		printf("\"Jawaban adalah kunci. Urutan adalah jalan.\"\n");
     	delay();
-		printf("“Susun hasilnya dari yang TERKECIL hingga TERBESAR untuk melanjutkan.”\n\n");
+		printf("\"Susun hasilnya dari yang TERKECIL hingga TERBESAR untuk melanjutkan.\"\n\n");
     	delay();
 		printf("1. 7^2 - 7\n2. Angka jika digabungkan menjadi huruf B\n3. Angka Keberuntungan\n4. (23 + 10 - 22) * (2^3)\n5. 62537^0\n\n");
     	delay();
@@ -360,8 +369,8 @@ void narasi2_1(int pertama1, int *attempt){
 	else{
 		printf("=== RUANGAN 4 : SUSUNAN MISTERIUS ===\n");
 		printf ("                                                                          Attempt: %d\n", *attempt);
-    	printf("“Jawaban adalah kunci. Urutan adalah jalan.”\n");
-    	printf("“Susun hasilnya dari yang TERKECIL hingga TERBESAR untuk melanjutkan.”\n\n");
+    	printf("\"Jawaban adalah kunci. Urutan adalah jalan.\"\n");
+    	printf("\"Susun hasilnya dari yang TERKECIL hingga TERBESAR untuk melanjutkan.\"\n\n");
     	printf("1. 7^2 - 7\n2. Angka jika digabungkan menjadi huruf B\n3. Angka Keberuntungan\n4. (23 + 10 - 22) * (2^3)\n5. 62537^0\n\n");
     	printf ("Kamu tahu apa yang harus dilakukan\n");
 	}
@@ -436,18 +445,18 @@ void narasi3_1(int pertama1, int *attempt){
 		printf("=== RUANGAN ? : HAFALAN MALAPETAKA ===\n");
     	printf ("                                                                          Attempt: %d\n", *attempt);
     	delay();
-    	printf ("\"Siapkan dirimu, wahai anak muda\"\n");
+    	printf ("\"Siapkan dirimu, wahai anak muda.\"\n");
     	delay();
     	printf ("\"Karena, hanya keberanian dan kecerdikan yang akan menang di sini.\"\n");
     	delay();
-    	printf ("\"Mari kita pemanasan terlebih dahulu WAHAHAHAHA\"\n\n");	
+    	printf ("\"Mari kita pemanasan terlebih dahulu, WAHAHAHAHA!\"\n\n");	
 	}
 	else{
 		printf("=== RUANGAN ? : HAFALAN MALAPETAKA ===\n");
     	printf ("                                                                          Attempt: %d\n", *attempt);
-    	printf ("\"Siapkan dirimu, wahai anak muda\"\n");
+    	printf ("\"Siapkan dirimu, wahai anak muda.\"\n");
     	printf ("\"Karena, hanya keberanian dan kecerdikan yang akan menang di sini.\"\n");
-    	printf ("\"Mari kita pemanasan terlebih dahulu WAHAHAHAHA\"\n\n");
+    	printf ("\"Mari kita pemanasan terlebih dahulu, WAHAHAHAHA!\"\n\n");
 	}
 }
 
@@ -477,24 +486,25 @@ void narasi3_3(int pertama3, int *attempt){
 		printf("                                                                          Attempt: %d\n", *attempt);	
 		printf ("Wow, menakjubkan..\n");
 		delay();
-		printf("Selanjutnya adalah yang terakhir\n\n");
+		printf("Selanjutnya adalah yang terakhir.\n\n");
 		delay();
-		printf ("Bila berhasil, kamu berhak untuk keluar\n");
+		printf ("Bila berhasil, kamu berhak untuk keluar.\n");
 		delay();
-		printf("Bila tidak, kamu akan menerima konsekuensinya\n");
+		printf("Bila tidak, kamu akan menerima konsekuensinya.\n");
 		delay();
-		printf ("SELAMAT BERJUANG\n");
+		printf ("SELAMAT BERJUANG.\n");
 		
 	}
 	else{
 		printf("=== RUANGAN ?: HAFALAN MALAPETAKA ===\n");
-		printf("Ini adalah yang terakhir\n");
+		printf("                                                                          Attempt: %d\n", *attempt);
+		printf("Ini adalah yang terakhir.\n");
 		delay();
-		printf ("Bila berhasil, kamu berhak untuk keluar\n");
+		printf ("Bila berhasil, kamu berhak untuk keluar.\n");
 		delay();
-		printf("Bila tidak, kamu akan menerima konsekuensinya\n");
+		printf("Bila tidak, kamu akan menerima konsekuensinya.\n");
 		delay();
-		printf ("SELAMAT BERJUANG\n");
+		printf ("SELAMAT BERJUANG.\n");
 	}
 }
 
@@ -655,11 +665,11 @@ void pintu2ed(){
 	delay();
 	printf ("Kali ini bukan karena keberuntungan..\n\n");
 	delay();
-	printf ("Langkahmu jitu\n");
+	printf ("Langkahmu jitu.\n");
 	delay();
-	printf ("Angka-angka tunduk pada nalarmu\n");
+	printf ("Angka-angka tunduk pada nalarmu.\n");
 	delay();
-	printf ("Dan urutanmu sempurna\n\n");
+	printf ("Dan urutanmu sempurna.\n\n");
 	delay();
 }
 
@@ -671,7 +681,7 @@ int pintu3_1(int pertama1, int *attempt){
 	int x[5] = {random_num(), random_num(),random_num(),random_num(),random_num()};
 	for (int i = 0; i < 5; i++){
 		printf ("%d", x[i]);
-		Sleep(500);
+		delay_custom(500);
 	}
 	
 	printf ("\rUntuk yang pertama: *****\n\n");
@@ -689,7 +699,7 @@ int pintu3_1(int pertama1, int *attempt){
 	else{
 		printf ("Jawabanmu berbeda. Sang Pencipta menghukummu dan matamu mulai kabur.\n");
 		return 0;
-	};
+	}
 }
 int pintu3_2(int pertama2, int *attempt){
 	narasi3_2(pertama2, attempt);
@@ -699,7 +709,7 @@ int pintu3_2(int pertama2, int *attempt){
 	int x[7] = {random_num(), random_num(),random_num(),random_num(),random_num(), random_num(),random_num()};
 	for (int i = 0; i < 7; i++){
 		printf ("%d", x[i]);
-		Sleep(1000);
+		delay_custom(800);
 	}
 	//
 	printf ("\rUntuk yang kedua: *******\n\n");
@@ -727,13 +737,13 @@ int pintu3_3(int pertama3, int *attempt){
 	char x[9] = {random_num_char(), random_char(),random_num_char(),random_char(),random_char(), random_num_char(),random_num_char(), random_char()};
 	for (int i = 0; i < 8; i++){
 		printf ("%c", x[i]);
-		Sleep(1000);
+		delay_custom(800);
 	}
 	//
 	printf ("\rUntuk yang terakhir: ********\n\n");
 	printf ("Jawabanmu: ");
 	char jawab[9];
-	scanf ("%8s", jawab);
+	scanf (" %8s", jawab);
 	int benar = 0;
 	for (int i = 0; i < 8; i++){
 		if (jawab[i] == x[i]) benar++;
@@ -750,17 +760,17 @@ int pintu3_3(int pertama3, int *attempt){
 }
 
 void pintu3ed(){
-	printf ("Kamu menghela napas yang panjang\n");
+	printf ("Kamu menghela napas yang panjang.\n");
 	delay();
-	printf ("Kamu merasa lelah, tetapi rasanya sangatlah lega\n\n");
+	printf ("Kamu merasa lelah, tetapi rasanya sangatlah lega.\n\n");
 	delay();
 	printf ("Di depanmu, sang Pencipta berkata:\n");
 	delay();
-	printf ("\"Kamu berhasil, anak muda\"\n");
+	printf ("\"Kamu berhasil, anak muda.\"\n");
 	delay();
 	printf("\"Kecerdasanmu, ketenanganmu, dan tekadmu telah membawamu sejauh ini.\"\n\n");
 	delay();
-	printf ("Cahaya mulai redup, dinding-dinding mulai runtuh, kamu mulai terjatuh pingsan\n");
+	printf ("Cahaya mulai redup, dinding-dinding mulai runtuh, kamu mulai terjatuh pingsan.\n");
 	delay();
 	printf ("Sang Pencipta bergumam untuk terakhir kalinya:\n");
 	delay();
@@ -938,21 +948,24 @@ int main(){
 				//selesai
 				break;
 			}
+			jeda_dan_hapus();
         	break;
    		}	
 		case 2:
     		system(CLEAR);
     		show_leaderboard();
     		jeda_dan_hapus();
-    		continue;
+    		break;
 		case 3:
+			system(CLEAR);
 			printf ("Selamat tinggal...\n");
 			printf ("Sampai jumpa di kesempatan berikutnya!\n");
-			break;
+			return 0;
 		default:
 			printf ("Input tidak valid!\n");
-			continue;
+			jeda_dan_hapus();
+			break;
+		}
 	}
 	return 0;
-}
 }
